@@ -15,5 +15,5 @@ Examples:
 4. metasprites, two pads polling, collision detection
 5. unpacking a RLE-packed nametable created with NES Screen Tool into the VRAM
 
-mailto:shiru@mail.ru
+mailto:shiru@mail.ru  
 http://shiru.untergrund.net
