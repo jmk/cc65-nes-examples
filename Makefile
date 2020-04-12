@@ -1,7 +1,9 @@
 
-CC := cc65
-CA := ca65
-LD := ld65
+CC := cc65/bin/cc65
+CA := cc65/bin/ca65
+LD := cc65/bin/ld65
+
+TARGET_PLATFORM := nes
 
 TARGETS := example1.nes
 TARGETS += example2.nes
@@ -43,11 +45,11 @@ clean:
 	@rm -fv $(ASSEMBLY_SOURCES)
 
 %.s: %.c
-	$(CC) -Oi $< --add-source
+	$(CC) -Oi $< --target $(TARGET_PLATFORM) -Icc65/include/ --add-source
 
 %.o: %.s
 	$(CA) $<
 
 %.nes: %.o crt0.o
-	$(LD) -C nes.cfg -o $@ $^ nes.lib
+	$(LD) -C $(TARGET_PLATFORM).cfg -o $@ $^ $(TARGET_PLATFORM).lib
 
