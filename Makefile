@@ -8,7 +8,16 @@ TARGETS += example2.nes
 TARGETS += example3.nes
 TARGETS += example4.nes
 TARGETS += example5.nes
+#TARGETS += example6.nes
+#TARGETS += example7.nes
+#TARGETS += example8.nes
+#TARGETS += example9.nes
+#TARGETS += example10.nes
+#TARGETS += example11.nes
 
+EMULATOR ?= higan
+
+EXAMPLES := $(TARGETS:..nes=)
 OBJECTS := $(TARGETS:.nes=.o)
 ASSEMBLY_SOURCES := $(TARGETS:.nes=.s)
 C_SOURCES := $(TARGETS:.nes=.c)
@@ -24,6 +33,9 @@ C_SOURCES := $(TARGETS:.nes=.c)
 .PRECIOUS: %.s %.o
 
 all: $(TARGETS)
+
+%: %.nes
+	$(EMULATOR) $<
 
 clean:
 	@rm -fv $(TARGETS)
