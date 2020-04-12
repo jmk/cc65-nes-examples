@@ -1,22 +1,40 @@
-.PHONY: clean all
 
-.PRECIOUS: *.o
+CC := cc65
+CA := ca65
+LD := ld65
 
-all: example1.nes example2.nes example3.nes example4.nes example5.nes
+TARGETS := example1.nes
+TARGETS += example2.nes
+TARGETS += example3.nes
+TARGETS += example4.nes
+TARGETS += example5.nes
+
+OBJECTS := $(TARGETS:.nes=.o)
+ASSEMBLY_SOURCES := $(TARGETS:.nes=.s)
+C_SOURCES := $(TARGETS:.nes=.c)
+
+.PHONY: all
+
+# Disable builtin rules (for .c, .o) by providing an empty .SUFFIXES rule
+# Yes. GNU make is a rat's nest
+.SUFFIXES:
+
+# Make sure intermediate files are *NOT* deleted
+# Yes. GNU make is a rat's nest
+.PRECIOUS: %.s %.o
+
+all: $(TARGETS)
 
 clean:
-	@rm -fv example1.s example2.s example3.s example4.s example5.s
-	@rm -fv example1.o example2.o example3.o example4.o example5.o
-	@rm -fv example1.nes example2.nes example3.nes example4.nes example5.nes
-	@rm -fv crt0.o
+	@rm -fv $(TARGETS)
+	@rm -fv $(OBJECTS)
+	@rm -fv $(ASSEMBLY_SOURCES)
 
-crt0.o: crt0.s
-	ca65 crt0.s
+%.s: %.c
+	$(CC) -Oi $< --add-source
 
-%.o: %.c
-	cc65 -Oi $< --add-source
-	ca65 $*.s
-	rm $*.s
+%.o: %.s
+	$(CA) $<
 
 %.nes: %.o crt0.o
-	ld65 -C nes.cfg -o $@ crt0.o $< nes.lib
+	$(LD) -C nes.cfg -o $@ crt0.o $< nes.lib
