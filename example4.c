@@ -4,6 +4,7 @@
 #include "neslib.h"
 
 
+
 //variables
 
 static unsigned char i;
@@ -69,7 +70,7 @@ void main(void)
 
 	while(1)
 	{
-		ppu_waitnmi();//wait for next TV frame
+		ppu_wait_frame();//wait for next TV frame
 
 		//flashing color for touch
 		

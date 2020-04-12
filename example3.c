@@ -5,32 +5,32 @@
 #include "neslib.h"
 
 
-//these macro are needed to simplify defining update list constants
-
-#define NTADR(x,y)	((0x2000|((y)<<5)|x))
-
-#define MSB(x)		(((x)>>8))
-#define LSB(x)		(((x)&0xff))
 
 //variables
 
 static unsigned char i;
 static unsigned char x,y;
 
-//the update list, it is for 6 tiles, 3 bytes per tile
+//the update list, there is room for 6 non-sequental tiles (3 bytes per tile), two sequences of 4 tiles (3+4 bytes each), and end marker
 
-static unsigned char list[6*3];
+static unsigned char list[6*3+7+7+1];
 
 //init data for the update list, it contains MSB and LSB of a tile address
 //in the nametable, then the tile number
 
-const unsigned char list_init[6*3]={
-	MSB(NTADR(2,2)),LSB(NTADR(2,2)),0,
-	MSB(NTADR(3,2)),LSB(NTADR(3,2)),0,
-	MSB(NTADR(4,2)),LSB(NTADR(4,2)),0,
-	MSB(NTADR(6,2)),LSB(NTADR(6,2)),0,
-	MSB(NTADR(7,2)),LSB(NTADR(7,2)),0,
-	MSB(NTADR(8,2)),LSB(NTADR(8,2)),0
+const unsigned char list_init[6*3+7+7+1]={
+	MSB(NTADR_A(2,2)),LSB(NTADR_A(2,2)),0,//non-sequental updates
+	MSB(NTADR_A(3,2)),LSB(NTADR_A(3,2)),0,
+	MSB(NTADR_A(4,2)),LSB(NTADR_A(4,2)),0,
+	MSB(NTADR_A(6,2)),LSB(NTADR_A(6,2)),0,
+	MSB(NTADR_A(7,2)),LSB(NTADR_A(7,2)),0,
+	MSB(NTADR_A(8,2)),LSB(NTADR_A(8,2)),0,
+	
+	MSB(NTADR_A(2,4))|NT_UPD_HORZ,LSB(NTADR_A(2,4)),4,'H'-0x20,'O'-0x20,'R'-0x20,'Z'-0x20,//horizontal update sequence
+
+	MSB(NTADR_A(2,6))|NT_UPD_VERT,LSB(NTADR_A(2,6)),4,'V'-0x20,'E'-0x20,'R'-0x20,'T'-0x20,//vertical update sequence
+
+	NT_UPD_EOF
 };
 
 
@@ -41,7 +41,8 @@ void main(void)
 	pal_col(17,0x30);//white color for sprite
 
 	memcpy(list,list_init,sizeof(list_init));
-	set_vram_update(6,list);
+	
+	set_vram_update(list);
 
 	ppu_on_all();//enable rendering
 
@@ -52,7 +53,7 @@ void main(void)
 
 	while(1)
 	{
-		ppu_waitnmi();//wait for next TV frame
+		ppu_wait_frame();//wait for next TV frame
 
 		oam_spr(x,y,0x41,0,0);//put sprite
 

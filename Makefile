@@ -10,12 +10,12 @@ TARGETS += example2.nes
 TARGETS += example3.nes
 TARGETS += example4.nes
 TARGETS += example5.nes
-#TARGETS += example6.nes
-#TARGETS += example7.nes
-#TARGETS += example8.nes
-#TARGETS += example9.nes
-#TARGETS += example10.nes
-#TARGETS += example11.nes
+TARGETS += example6.nes
+TARGETS += example7.nes
+TARGETS += example8.nes
+TARGETS += example9.nes
+TARGETS += example10.nes
+TARGETS += example11.nes
 
 EMULATOR ?= higan
 
@@ -43,6 +43,7 @@ clean:
 	@rm -fv $(TARGETS)
 	@rm -fv $(OBJECTS)
 	@rm -fv $(ASSEMBLY_SOURCES)
+	@rm -fv crt0.o
 
 %.s: %.c
 	$(CC) -Oi $< --target $(TARGET_PLATFORM) -Icc65/include/ --add-source
@@ -51,5 +52,5 @@ clean:
 	$(CA) $<
 
 %.nes: %.o crt0.o
-	$(LD) -C $(TARGET_PLATFORM).cfg -o $@ $^ $(TARGET_PLATFORM).lib
+	$(LD) -C nrom_128_horz.cfg -o $@ $^ $(TARGET_PLATFORM).lib
 
