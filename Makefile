@@ -49,4 +49,5 @@ clean:
 	$(CA) $<
 
 %.nes: %.o crt0.o
-	$(LD) -C nes.cfg -o $@ crt0.o $< nes.lib
+	$(LD) -C nes.cfg -o $@ $^ nes.lib
+
