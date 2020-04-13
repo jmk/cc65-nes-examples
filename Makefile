@@ -1,7 +1,10 @@
 
-CC := cc65/bin/cc65
-CA := cc65/bin/ca65
-LD := cc65/bin/ld65
+#CC65_DIR := cc65-nes-2.13.3-1
+CC65_DIR := cc65
+
+CC := $(CC65_DIR)/bin/cc65
+CA := $(CC65_DIR)/bin/ca65
+LD := $(CC65_DIR)/bin/ld65
 
 TARGET_PLATFORM := nes
 
@@ -46,7 +49,7 @@ clean:
 	@rm -fv crt0.o
 
 %.s: %.c
-	$(CC) -Oi $< --target $(TARGET_PLATFORM) -Icc65/include/ --add-source
+	$(CC) -Oi $< --target $(TARGET_PLATFORM) -I$(CC65_DIR)/include/ --add-source
 
 %.o: %.s
 	$(CA) $<
