@@ -37,7 +37,11 @@ C_SOURCES := $(TARGETS:.nes=.c)
 # Yes. GNU make is a rat's nest
 .PRECIOUS: %.s %.o
 
-all: $(TARGETS)
+all: $(CC) $(TARGETS)
+
+# submodule build
+$(CC):
+	cd $(CC65_DIR) && $(MAKE)
 
 %: %.nes
 	$(EMULATOR) $<
