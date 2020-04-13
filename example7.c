@@ -33,7 +33,8 @@ void main(void)
 		
 		ppu_wait_nmi();//not ppu_wait_frame, because every 6th frame would not have the split
 		
-		split(bottom_x,0);//set scroll below the screen split point
+		// Split appears broken in most recent cc65 versions
+		//split(bottom_x,0);//set scroll below the screen split point
 		
 		++top_x;
 		--bottom_x;
