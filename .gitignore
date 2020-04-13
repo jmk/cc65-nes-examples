@@ -1,2 +1,3 @@
 *.o
 *.nes
+example*.s
