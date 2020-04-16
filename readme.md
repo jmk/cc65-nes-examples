@@ -1,4 +1,21 @@
-Note: These examples are from [Shiru's NES programming tutorial](http://shiru.untergrund.net/articles/programming_nes_games_in_c.htm); I merely wrote a minimal Makefile so I could mess around on Mac OS X. The original readme follows.
+# NES Examples in C
+
+These examples are from [Shiru's NES programming tutorial](http://shiru.untergrund.net/articles/programming_nes_games_in_c.htm);
+
+# Building
+
+By default the `cc65` toolset (required to build) is included as a submodule, so please clone recursively.
+
+With the `cc65` submodule present you should be able to build as any of the following
+
+```
+# build .nes rom files for all examples
+make
+# build and run a specific .nes file in the default emulator
+make example1
+```
+
+The original readme follows.
 
 ---
 
@@ -14,6 +31,12 @@ Examples:
 3. pad polling and nametable updating when rendering is enabled
 4. metasprites, two pads polling, collision detection
 5. unpacking a RLE-packed nametable created with NES Screen Tool into the VRAM
+6. Controlling brightness of sprites and background.
+7. Left/Right horizontal scrolling and screen splits.
+8. Music/Sound effects.
+9. Simple vertical scrolling a randomly generated background.
+10. Vertical scrolling a level with simple collision detection.
+11. Vertical scrolling a level with bouncing sprites superimposed.
 
 mailto:shiru@mail.ru  
 http://shiru.untergrund.net

@@ -36,7 +36,7 @@ const unsigned char palSprites[16]={
 void main(void)
 {
 	pal_spr(palSprites);//set palette for sprites
-	oam_size(1);
+
 	ppu_on_all();//enable rendering
 
 	//initialize balls parameters
@@ -67,7 +67,7 @@ void main(void)
 
 	while(1)
 	{
-		ppu_waitnmi();//wait for next TV frame
+		ppu_wait_frame();//wait for next TV frame
 
 		spr=0;
 
