@@ -1,6 +1,6 @@
 # NES Examples in C
 
-These examples are from [Shiru's NES programming tutorial](http://shiru.untergrund.net/articles/programming_nes_games_in_c.htm);
+These examples are from [Shiru's NES programming tutorial](http://shiru.untergrund.net/articles/programming_nes_games_in_c.htm).
 
 # Building
 
