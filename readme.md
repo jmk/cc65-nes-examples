@@ -19,9 +19,9 @@ The original readme follows.
 
 ---
 
-This is a set of very simple examples of programming NES software in C using CC65 compiler and my low level code library. To get more information you can check out my article on this topic: http://shiru.untergrund.net/articles/programming_nes_games_in_c.htm
+This is a set of very simple examples of programming NES software in C using cc65 compiler and my low level code library. To get more information you can check out my article on this topic: http://shiru.untergrund.net/articles/programming_nes_games_in_c.htm
 
-How to compile: download CC65 from http://cc65.org/, unpack into a directory, unpack this folder into that directory (where /bin/ etc is located), run compile_all.bat
+How to compile: download cc65 from https://cc65.github.io/, unpack into a directory, unpack this folder into that directory (where /bin/ etc is located), run compile_all.bat
 
 
 Examples:
