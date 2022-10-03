@@ -1,6 +1,6 @@
 
 #CC65_DIR := cc65-nes-2.13.3-1
-CC65_DIR := cc65
+CC65_DIR := /usr
 
 CC := $(CC65_DIR)/bin/cc65
 CA := $(CC65_DIR)/bin/ca65
