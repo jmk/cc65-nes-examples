@@ -4,9 +4,15 @@ These examples are from [Shiru's NES programming tutorial](http://shiru.untergru
 
 # Building
 
-By default the `cc65` toolset (required to build) is included as a submodule, so please clone recursively.
+By default the `cc65` toolset (required to build) is included as a submodule, so please clone recursively and build it first to prepare your repository:
 
-With the `cc65` submodule present you should be able to build as any of the following
+```
+git submodule update --init --recursive
+cd cc65
+make -j8
+```
+
+With the `cc65` submodule present you should be able to build as any of the following:
 
 ```
 # build .nes rom files for all examples
